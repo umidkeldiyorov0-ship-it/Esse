@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Esse bloknoti</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8b5cf6">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg1:#ffe9f1;--bg2:#e4ecff;--bg3:#e2fbef;--paper:#fffefb;--ink:#26263a;--muted:#6d6d88;--line:#cfe0ff;--margin:#ff6b8b;--c1:#ff6b8b;--c2:#ff9f45;--c3:#f5c518;--c4:#2fbf71;--c5:#3b8cff;--c6:#8b5cf6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1622;--bg2:#161d33;--bg3:#12281f;--paper:#1d1d2b;--ink:#ececf8;--muted:#9a9ab5;--line:#2c3558;--margin:#c2506b}}
+:root[data-theme="dark"]{--bg1:#2a1622;--bg2:#161d33;--bg3:#12281f;--paper:#1d1d2b;--ink:#ececf8;--muted:#9a9ab5;--line:#2c3558;--margin:#c2506b}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:"Literata",Georgia,"Times New Roman",serif;background:linear-gradient(135deg,var(--bg1),var(--bg2) 55%,var(--bg3)) fixed}
+.wrap{max-width:720px;margin:0 auto;padding:16px 14px 110px}
+[hidden]{display:none!important}
+input,textarea,button{font:inherit;color:inherit}
+.rainbow{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5),var(--c6));margin-bottom:10px}
+h1{font-size:1.7rem;margin:10px 2px 14px}
+.card{display:block;width:100%;text-align:left;border:0;background:var(--paper);border-radius:12px;padding:14px 16px 14px 20px;margin-bottom:12px;cursor:pointer;box-shadow:0 2px 8px rgba(70,60,120,.16);border-left:8px solid var(--cc,var(--c5))}
+.card:active{transform:scale(.99)}
+.card h2{margin:0 0 4px;font-size:1.1rem}
+.card p{margin:0 0 6px;color:var(--muted);font-size:.9rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card small{color:var(--muted);font-size:.78rem}
+.empty{text-align:center;color:var(--muted);padding:48px 12px;line-height:1.6}
+.fab{position:fixed;right:max(18px,calc(50% - 342px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:62px;height:62px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--c1),var(--c6));color:#fff;font-size:2.2rem;line-height:1;cursor:pointer;box-shadow:0 6px 16px rgba(120,60,160,.4)}
+.fab:active{transform:scale(.94)}
+.export{display:block;width:100%;margin:0 0 14px}
+.file{background:var(--c5)}
+.top{display:flex;align-items:center;gap:10px}
+.back{border:0;background:var(--paper);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;box-shadow:0 1px 4px rgba(70,60,120,.15)}
+.title{flex:1;min-width:0;border:0;background:transparent;font-size:1.5rem;font-weight:600;padding:8px 2px;outline:none;line-height:1.25}
+.title::placeholder{color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;color:var(--muted);font-size:.85rem;margin:6px 2px 12px}
+.bar b{color:var(--c6);font-size:1rem}
+.bar input[type=number]{width:64px;border:2px solid var(--c5);background:var(--paper);border-radius:8px;padding:3px 6px;font-size:.85rem}
+.prog{flex:1 1 100%;height:8px;background:var(--paper);border-radius:4px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5),var(--c6));transition:width .25s}
+.sheet{background:var(--paper);border-radius:12px;border-top:6px solid var(--c5);box-shadow:0 4px 14px rgba(70,60,120,.18);position:relative;overflow:hidden}
+.sheet::before{content:"";position:absolute;top:0;bottom:0;left:44px;width:2px;background:var(--margin);opacity:.75;pointer-events:none}
+textarea{display:block;width:100%;min-height:50vh;border:0;outline:none;resize:vertical;background-color:transparent;padding:8px 16px 0 58px;font-size:1.05rem;line-height:32px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px);background-attachment:local}
+.reader{margin-top:14px;padding:12px 14px;background:var(--paper);border-radius:12px;box-shadow:0 2px 8px rgba(70,60,120,.14);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.reader label{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);flex:1 1 180px}
+.reader input[type=range]{flex:1;accent-color:var(--c6)}
+.btn{border:0;border-radius:10px;padding:10px 16px;cursor:pointer;font-size:.92rem;font-weight:600;color:#fff}
+.btn:active{transform:scale(.97)}
+.read{background:var(--c4)}.pause{background:var(--c5)}.stop{background:var(--c2)}.copy{background:var(--c6)}.del{background:var(--c1)}
+.actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.status{margin-left:auto;align-self:center;color:var(--muted);font-size:.8rem}
+.btn:focus-visible,.back:focus-visible,.card:focus-visible,.fab:focus-visible,textarea:focus-visible,.title:focus-visible,input:focus-visible{outline:3px solid var(--c6);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.prog i,.btn,.card,.fab{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="rainbow"></div>
+
+  <section id="home">
+    <h1>Mening esselarim</h1>
+    <button class="btn copy export" id="exportAll" hidden>Hammasini Esselar papkasi sifatida saqlash</button>
+    <div id="list"></div>
+    <button class="fab" id="add" aria-label="Yangi esse yozish">+</button>
+  </section>
+
+  <section id="editor" hidden>
+    <div class="top">
+      <button class="back" id="back">‹ Orqaga</button>
+      <input class="title" id="title" placeholder="Esse mavzusi" aria-label="Esse mavzusi">
+    </div>
+    <div class="bar">
+      <span><b id="total">0</b> so‘z</span>
+      <label>Maqsad: <input id="goal" type="number" min="0" step="50" value="500"> so‘z</label>
+      <div class="prog" aria-hidden="true"><i id="prog"></i></div>
+    </div>
+    <div class="sheet">
+      <textarea id="text" placeholder="Essengizni shu yerda yozing…" aria-label="Esse matni" spellcheck="true"></textarea>
+    </div>
+    <div class="reader">
+      <button class="btn read" id="read">Ovoz chiqarib o‘qish</button>
+      <button class="btn pause" id="pause" hidden>Pauza</button>
+      <button class="btn stop" id="stop" hidden>To‘xtatish</button>
+      <label>Tezlik <input id="rate" type="range" min="0.6" max="1.4" step="0.1" value="1"></label>
+    </div>
+    <div class="actions">
+      <button class="btn file" id="saveFile" hidden>Faylga saqlash</button>
+      <button class="btn copy" id="copy">Nusxalash</button>
+      <button class="btn del" id="del">O‘chirish</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+  </section>
+</div>
+<script>
+var $=function(i){return document.getElementById(i)};
+var KEY="esse-bloknot-3",COLORS=["--c1","--c2","--c4","--c5","--c6","--c3"];
+var essays=[],cur=null,timer,speaking=false,paused=false;
+
+function load(){
+  try{var s=localStorage.getItem(KEY);if(s){essays=JSON.parse(s)||[]}
+  else{var o=localStorage.getItem("esse-bloknot-2");if(o){var d=JSON.parse(o);if(d&&(d.title||d.text)){essays=[{id:Date.now(),title:d.title||"",text:d.text||"",goal:d.goal||500,updated:Date.now()}]}}}}catch(e){}
+}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(essays));$("status").textContent="Saqlandi"}catch(e){$("status").textContent="Saqlab bo‘lmadi"}}
+function saveSoon(){cur.updated=Date.now();clearTimeout(timer);timer=setTimeout(persist,400)}
+function words(t){var m=(t||"").trim().match(/\S+/g);return m?m.length:0}
+function fmt(ts){var d=new Date(ts),p=function(n){return n<10?"0"+n:n};return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()}
+
+function renderList(){
+  updateExport();
+  var box=$("list");box.innerHTML="";
+  if(!essays.length){var e=document.createElement("div");e.className="empty";e.textContent="Hali esse yo‘q. Yozishni boshlash uchun pastdagi + tugmasini bosing.";box.appendChild(e);return}
+  essays.slice().sort(function(a,b){return b.updated-a.updated}).forEach(function(es,i){
+    var c=document.createElement("button");c.className="card";c.style.setProperty("--cc","var("+COLORS[i%COLORS.length]+")");
+    var h=document.createElement("h2");h.textContent=es.title||"Nomsiz esse";
+    var p=document.createElement("p");p.textContent=es.text?es.text.slice(0,160):"Matn hali yozilmagan";
+    var s=document.createElement("small");s.textContent=words(es.text)+" so‘z · "+fmt(es.updated);
+    c.appendChild(h);c.appendChild(p);c.appendChild(s);
+    c.onclick=function(){openEssay(es)};box.appendChild(c);
+  });
+}
+function renderStats(){var w=words(cur.text),g=+cur.goal||0;$("total").textContent=w;$("prog").style.width=(g?Math.min(100,w/g*100):0)+"%"}
+function showHome(){stopSpeech();clearTimeout(timer);if(cur){if(!cur.title&&!cur.text){essays=essays.filter(function(x){return x!==cur})}persist()}cur=null;$("status").textContent="";renderList();$("editor").hidden=true;$("home").hidden=false;window.scrollTo(0,0)}
+function openEssay(es){cur=es;$("title").value=es.title;$("text").value=es.text;$("goal").value=es.goal;$("status").textContent="";renderStats();$("home").hidden=true;$("editor").hidden=false;window.scrollTo(0,0)}
+$("add").onclick=function(){var es={id:Date.now(),title:"",text:"",goal:500,updated:Date.now()};essays.push(es);openEssay(es);$("title").focus()};
+$("back").onclick=showHome;
+$("text").oninput=function(){cur.text=this.value;renderStats();saveSoon()};
+$("title").oninput=function(){cur.title=this.value;saveSoon()};
+$("goal").oninput=function(){cur.goal=this.value;renderStats();saveSoon()};
+$("del").onclick=function(){
+  var b=$("del");
+  if(b.dataset.sure){essays=essays.filter(function(x){return x!==cur});cur=null;delete b.dataset.sure;b.textContent="O‘chirish";persist();showHome();return}
+  b.dataset.sure=1;b.textContent="Aniqmi? Yana bosing";
+  setTimeout(function(){delete b.dataset.sure;b.textContent="O‘chirish"},3000);
+};
+$("copy").onclick=function(){
+  var full=[cur.title,cur.text].filter(Boolean).join("\n\n");
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(full).then(function(){$("status").textContent="Nusxalandi"},function(){$("status").textContent="Nusxalab bo‘lmadi"})}
+  else{$("status").textContent="Nusxalab bo‘lmadi"}
+};
+
+var synth=window.speechSynthesis;
+function pickVoice(){if(!synth)return null;return synth.getVoices().filter(function(x){return /^uz/i.test(x.lang)})[0]||null}
+function ui(){$("read").hidden=speaking;$("pause").hidden=!speaking;$("stop").hidden=!speaking;$("pause").textContent=paused?"Davom etish":"Pauza"}
+function stopSpeech(){if(synth){synth.cancel()}speaking=false;paused=false;ui()}
+$("read").onclick=function(){
+  if(!synth){$("status").textContent="Brauzeringiz ovozli o‘qishni qo‘llamaydi";return}
+  var ta=$("text"),sel=ta.value.substring(ta.selectionStart,ta.selectionEnd).trim();
+  var full=sel||[cur.title,cur.text].filter(Boolean).join(". ").trim();
+  if(!full){$("status").textContent="Avval biror narsa yozing";return}
+  synth.cancel();
+  var parts=full.match(/[^.!?\n]+[.!?]*/g)||[full],voice=pickVoice();
+  parts.forEach(function(p,i){
+    p=p.trim();if(!p)return;
+    var u=new SpeechSynthesisUtterance(p);
+    u.lang=voice?voice.lang:"uz-UZ";if(voice)u.voice=voice;
+    u.rate=+$("rate").value;
+    if(i===parts.length-1){u.onend=function(){speaking=false;paused=false;ui()}}
+    u.onerror=function(e){if(e.error!=="canceled"&&e.error!=="interrupted"){speaking=false;ui();$("status").textContent="O‘qib bo‘lmadi"}};
+    synth.speak(u);
+  });
+  speaking=true;paused=false;ui();
+  $("status").textContent=voice?"":"O‘zbek ovozi topilmadi, standart ovoz ishlatilmoqda";
+};
+$("pause").onclick=function(){if(!synth)return;if(paused){synth.resume();paused=false}else{synth.pause();paused=true}ui()};
+$("stop").onclick=stopSpeech;
+window.addEventListener("pagehide",stopSpeech);
+
+var dl=true;
+function safeName(t){return (t||"").replace(/[\\\/:*?"<>|\n\r]+/g," ").trim().slice(0,60)||"Nomsiz esse"}
+function essayFile(es){return (es.title?es.title+"\n\n":"")+(es.text||"")}
+function updateExport(){var b=$("exportAll");if(b)b.hidden=!essays.length}
+function flash(btn,msg){var o=btn.dataset.o||btn.textContent;btn.dataset.o=o;btn.textContent=msg;setTimeout(function(){btn.textContent=o},2500)}
+function download(name,blob){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500)}
+var CT=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc(b){var c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=CT[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+function u16(v){return [v&255,(v>>>8)&255]}
+function u32(v){return [v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}
+function makeZip(files){
+  var enc=new TextEncoder(),parts=[],cd=[],off=0;
+  files.forEach(function(f){
+    var nm=enc.encode(f.name),d=enc.encode(f.data),c=crc(d);
+    var lh=new Uint8Array([0x50,0x4b,3,4].concat(u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(c),u32(d.length),u32(d.length),u16(nm.length),u16(0)));
+    parts.push(lh,nm,d);
+    cd.push(new Uint8Array([0x50,0x4b,1,2].concat(u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(c),u32(d.length),u32(d.length),u16(nm.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off))),nm);
+    off+=lh.length+nm.length+d.length;
+  });
+  var cs=0;cd.forEach(function(x){cs+=x.length});
+  var end=new Uint8Array([0x50,0x4b,5,6].concat(u16(0),u16(0),u16(files.length),u16(files.length),u32(cs),u32(off),u16(0)));
+  return new Blob(parts.concat(cd,[end]),{type:"application/zip"});
+}
+$("saveFile").hidden=false;
+$("saveFile").onclick=function(){download(safeName(cur.title)+".txt",new Blob([essayFile(cur)],{type:"text/plain"}));flash(this,"Saqlandi")};
+$("exportAll").onclick=function(){
+  var used={},list=[];
+  essays.forEach(function(es){var n=safeName(es.title),k=n,c=1;while(used[k.toLowerCase()]){c++;k=n+" ("+c+")"}used[k.toLowerCase()]=1;list.push({name:"Esselar/"+k+".txt",data:essayFile(es)})});
+  download("Esselar.zip",makeZip(list));flash(this,"Saqlandi");
+};
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){})}
+load();renderList();ui();
+</script>
+</body>
+</html>
